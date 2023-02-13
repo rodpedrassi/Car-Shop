@@ -19,4 +19,9 @@ export default class TransferController {
     const newCar = await this.service.create(car);
     return this.res.status(201).json(newCar);
   }
+
+  public async findAll() {
+    const cars = await this.service.findAll();
+    return this.res.status(200).json(cars);
+  }
 }

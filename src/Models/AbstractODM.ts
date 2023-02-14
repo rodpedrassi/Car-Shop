@@ -46,6 +46,11 @@ abstract class AbstractODM<T> {
       { new: true },
     );
   }
+
+  public async remove(id: string): Promise<T | null> {
+    this.validateMongoId(id);
+    return this.model.findByIdAndDelete({ _id: id });
+  }
 }
   
 export default AbstractODM;

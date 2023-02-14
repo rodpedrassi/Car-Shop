@@ -3,6 +3,8 @@ import ICar from '../Interfaces/ICar';
 import HttpException from '../middlewares/helpers/HttpException';
 import CarODM from '../Models/CarODM';
 
+const CAR_NOT_FOUND = 'Car not found';
+
 export default class CarService {
   carODM: CarODM;
   constructor() {
@@ -20,12 +22,18 @@ export default class CarService {
   }
   public async findById(id: string) {
     const car = await this.carODM.findById(id);
-    if (!car) throw new HttpException(404, 'Car not found');
+    if (!car) throw new HttpException(404, CAR_NOT_FOUND);
     return new Car(car);
   }
   public async update(id: string, car: ICar) {
     const updated = await this.carODM.update(id, car);
-    if (!updated) throw new HttpException(404, 'Car not found');
+    if (!updated) throw new HttpException(404, CAR_NOT_FOUND);
     return new Car(updated);
+  }
+
+  public async remove(id: string) {
+    const removed = await this.carODM.remove(id);
+    if (!removed) throw new HttpException(404, CAR_NOT_FOUND);
+    return new Car(removed);
   }
 }

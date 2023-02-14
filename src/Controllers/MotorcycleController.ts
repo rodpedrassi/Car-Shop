@@ -44,4 +44,14 @@ export default class MotorcycleController { // KKKKKKKKKKKKKKKK
       this.next(error);
     }
   }
+
+  public async remove() {
+    const { id } = this.req.params;
+    try {
+      await this.service.remove(id);
+      return this.res.status(204).json();
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }

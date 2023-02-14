@@ -3,6 +3,8 @@ import IMotorcycle from '../Interfaces/IMotorcycle';
 import HttpException from '../middlewares/helpers/HttpException';
 import MotorcycleODM from '../Models/MotorcycleODM';
 
+const MOTOR_NOT_FOUND = 'Motorcycle not found';
+
 export default class MotorcycleService {
   motorcycleODM: MotorcycleODM;
   constructor() {
@@ -20,12 +22,18 @@ export default class MotorcycleService {
   }
   public async findById(id: string) {
     const motor = await this.motorcycleODM.findById(id);
-    if (!motor) throw new HttpException(404, 'Motorcycle not found');
+    if (!motor) throw new HttpException(404, MOTOR_NOT_FOUND);
     return new Motorcycle(motor);
   }
   public async update(id: string, motor: IMotorcycle) {
     const updated = await this.motorcycleODM.update(id, motor);
-    if (!updated) throw new HttpException(404, 'Motorcycle not found');
+    if (!updated) throw new HttpException(404, MOTOR_NOT_FOUND);
     return new Motorcycle(updated);
+  }
+
+  public async remove(id: string) {
+    const removed = await this.motorcycleODM.remove(id);
+    if (!removed) throw new HttpException(404, MOTOR_NOT_FOUND);
+    return new Motorcycle(removed);
   }
 }

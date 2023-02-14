@@ -1,17 +1,13 @@
 import ICar from '../Interfaces/ICar';
+import Vehicle from './Vehicle';
 
-export default class Car {
-  protected id?: string | undefined;
-  protected model: string;
-  protected year: number;
-  protected color: string;
-  protected status = false ;
-  protected buyValue: number;
+export default class Car extends Vehicle {
   private doorsQty: number;
   private seatsQty: number;
 
   constructor(car: ICar) {
     const { id, model, year, color, status, buyValue, doorsQty, seatsQty } = car;
+    super({ id, model, year, color, status, buyValue });
     this.id = id;
     this.model = model;
     this.year = year;
@@ -21,23 +17,6 @@ export default class Car {
     this.doorsQty = doorsQty;
     this.seatsQty = seatsQty;
   }
-  getId() { return this.id; }
-  setId(id: string) { this.id = id; }
-
-  getModel() { return this.model; }
-  setModel(model: string) { this.model = model; }
-
-  getYear() { return this.year; }
-  setYear(year: number) { this.year = year; }
-
-  getColor() { return this.color; }
-  setColor(color: string) { this.color = color; }
-
-  getStatus() { return this.status; }
-  setStatus(status: boolean) { this.status = status; }
-
-  getBuyValue() { return this.buyValue; }
-  setBuyValue(buyValue: number) { this.buyValue = buyValue; }
 
   getDoorsQty() { return this.doorsQty; }
   setDoorsQty(doorsQty: number) { this.doorsQty = doorsQty; }

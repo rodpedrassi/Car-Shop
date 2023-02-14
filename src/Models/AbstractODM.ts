@@ -4,8 +4,7 @@ import {
   Schema,
   model,
   isValidObjectId,
-  // UpdateQuery,
-  // isValidObjectId,
+  UpdateQuery,
 } from 'mongoose';
 import HttpException from '../middlewares/helpers/HttpException';
   
@@ -28,21 +27,25 @@ abstract class AbstractODM<T> {
     return this.model.find();
   }
 
-  public async findById(id: string): Promise<T | null> { 
+  private validateMongoId(id: string): void {
     if (!isValidObjectId(id)) throw new HttpException(422, 'Invalid mongo id');
+  }
+
+  public async findById(id: string): Promise<T | null> { 
+    this.validateMongoId(id);
     const car = this.model.findById(id);
     return car; 
   }
   
-  //   public async update(_id: string, obj: Partial<T>): Promise<T | null> {
-  //     if (!isValidObjectId(_id)) throw Error('Invalid Mongo id');
+  public async update(id: string, obj: Partial<T>): Promise<T | null> {
+    this.validateMongoId(id);
   
-//     return this.model.findByIdAndUpdate(
-//       { _id },
-//       { ...obj } as UpdateQuery<T>,
-//       { new: true },
-//     );
-//   }
+    return this.model.findByIdAndUpdate(
+      { _id: id },
+      { ...obj } as UpdateQuery<T>,
+      { new: true },
+    );
+  }
 }
   
 export default AbstractODM;

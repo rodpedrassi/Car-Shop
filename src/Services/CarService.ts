@@ -23,4 +23,9 @@ export default class CarService {
     if (!car) throw new HttpException(404, 'Car not found');
     return new Car(car);
   }
+  public async update(id: string, car: ICar) {
+    const updated = await this.carODM.update(id, car);
+    if (!updated) throw new HttpException(404, 'Car not found');
+    return new Car(updated);
+  }
 }

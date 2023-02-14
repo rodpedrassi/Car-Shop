@@ -8,6 +8,17 @@ const motoReq = {
   engineCapacity: 600,
 };
 
+const motoReqUpdated = {
+  id: '6348513f34c397abcad040b2',
+  model: 'Honda Cb 600f Hornet 3',
+  year: 2005,
+  color: 'Yellow',
+  status: true,
+  buyValue: 30.000,
+  category: 'Street',
+  engineCapacity: 600,
+};
+
 const motoRes = {
   id: '6348513f34c397abcad040b2',
   model: 'Honda Cb 600f Hornet',
@@ -42,4 +53,6 @@ const motosRes = [
   },
 ];
 
-export default { motoReq, motoRes, motosRes };
+const validId = '6348513f34c397abcad040b2';
+
+export default { motoReq, motoRes, motosRes, motoReqUpdated, validId };

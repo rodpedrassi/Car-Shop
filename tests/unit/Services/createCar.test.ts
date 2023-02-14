@@ -5,7 +5,7 @@ import car from '../../mocks/car';
 import CarService from '../../../src/Services/CarService';
 
 describe('Deveria criar um carro', function () {
-  test('Criando um carro com SUCESSO', async function () { 
+  it('Criando um carro com SUCESSO', async function () { 
     Sinon.stub(Model, 'create').resolves(car.createCar);
 
     const service = new CarService();

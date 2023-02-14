@@ -23,9 +23,9 @@ export default class MotorcycleService {
     if (!motor) throw new HttpException(404, 'Motorcycle not found');
     return new Motorcycle(motor);
   }
-//   public async update(id: string, car: ICar) {
-//     const updated = await this.carODM.update(id, car);
-//     if (!updated) throw new HttpException(404, 'Car not found');
-//     return new Car(updated);
-//   }
+  public async update(id: string, motor: IMotorcycle) {
+    const updated = await this.motorcycleODM.update(id, motor);
+    if (!updated) throw new HttpException(404, 'Motorcycle not found');
+    return new Motorcycle(updated);
+  }
 }
